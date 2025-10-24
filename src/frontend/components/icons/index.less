@@ -1,0 +1,92 @@
+@import '../../common/variables';
+
+.cons-icons {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #0D6EFD;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+
+  &:hover {
+    background-color: @const-icon-default-hover-background-color;
+  }
+
+  &_disabled {
+    filter: grayscale(1);
+  }
+
+  &_delete {
+    mask-image: url('../../icons/trash.svg');
+  }
+
+  &_edit {
+    mask-image: url('../../icons/pencil-square.svg');
+  }
+
+  &_download {
+    mask-image: url('../../icons/cloud-download.svg');
+  }
+
+  &_close {
+    mask-image: url('../../icons/x-black.svg');
+  }
+
+  &_folder {
+    mask-image: url('../../icons/folder.svg');
+  }
+
+  &_person {
+    mask-image: url('../../icons/person-lines-fill.svg');
+  }
+
+  &_eye {
+    mask-image: url('../../icons/eye-fill.svg');
+  }
+
+  &_expand {
+    mask-image: url('../../icons/arrows-expand-vertical.svg');
+  }
+
+  &_link {
+    mask-image: url('../../icons/link.svg');
+  }
+
+  &_document-hat {
+    mask-image: url('../../icons/document-hat.svg');
+  }
+
+  &_search-lens-checked {
+    background-color: #677487;
+    mask-image: url('../../icons/search-lens-checked.svg');
+
+    &:hover {
+      background-color: #677487;
+    }
+  }
+
+  &_lightning-orange {
+    background-color: #FF9D00;
+    mask-image: url('../../icons/lightning-orange.svg');
+  }
+
+  &_reorder {
+    mask-image: url('../../icons/reorder.svg');
+  }
+
+  &_black {
+    background-color: #000;
+  }
+
+  &_gray {
+    background-color: #6C757D;
+  }
+
+  &_blue {
+    background-color: #0056cc;
+  }
+
+  &_red {
+    background-color: #dc3545;
+  }
+}

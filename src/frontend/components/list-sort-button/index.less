@@ -1,0 +1,54 @@
+@import '../../common/variables';
+
+.cons-list-sort-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 0;
+  border: none;
+  appearance: none;
+  background: #0000;
+  cursor: pointer;
+  font-size: @const-font-size-default;
+  font-weight: 700;
+  line-height: var(--line-height, var(--admin-components-default-line-height));
+  text-align: left;
+
+  &__content {
+    overflow: hidden;
+    color: var(--color-th, var(--admin-components-default-color-th));
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    text-overflow: ellipsis;
+    text-underline-position: under;
+    white-space: nowrap;
+
+    &_active {
+      color: var(--color-active, var(--admin-components-default-color-active));
+      text-decoration: none;
+    }
+  }
+
+  &__sort {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+    background-color: var(--color-active, var(--admin-components-default-color-active));
+    mask-image: url('../../icons/sort-down.svg');
+    mask-repeat: no-repeat;
+    mask-size: cover;
+
+    &_desc {
+      transform: scaleY(-1);
+    }
+  }
+
+  &:hover &__content {
+    color: var(--color-list-sort-button-hover, var(--admin-components-default-color-list-sort-button-hover));
+  }
+
+  &:hover &__sort {
+    background-color: var(--color-list-sort-button-hover, var(--admin-components-default-color-list-sort-button-hover));
+  }
+}

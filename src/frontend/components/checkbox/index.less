@@ -1,0 +1,61 @@
+@import '../../common/variables';
+
+.cons-checkbox {
+  display: flex;
+  width: max-content;
+  align-items: center;
+
+  &_disabled {
+    opacity: 0.5;
+  }
+
+  &__input {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    padding: 0;
+    border-radius: var(--border-radius-sm, var(--admin-components-default-border-radius-sm));
+    margin: 0 6px 0 0;
+    appearance: none;
+    background-color: #fff;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    box-shadow: 0 0 0 1px var(--color-border, var(--admin-components-default-color-border));
+    cursor: pointer;
+
+
+    &_checked {
+      background-color: var(--color-checked, var(--admin-components-default-color-checked));
+      background-image: url('../../icons/check-white.svg');
+      box-shadow: 0 0 0 1px var(--color-checked, var(--admin-components-default-color-checked));
+    }
+
+    &_error {
+      box-shadow: 0 0 0 1px var(--color-danger, var(--admin-components-default-color-danger));
+    }
+
+    &_checked&_error {
+      background-color: var(--color-danger, var(--admin-components-default-color-danger));
+    }
+  }
+
+  &:hover {
+    .cons-checkbox__input_checked  { /* stylelint-disable-line selector-class-pattern */
+      background-color: var(--color-checked-hover, var(--admin-components-default-color-checked-hover));
+      box-shadow: 0 0 0 1px var(--color-checked-hover, var(--admin-components-default-color-checked-hover));
+    }
+  }
+
+  &__label {
+    flex-grow: 1;
+    margin-bottom: 0;
+    color: var(--color-text, var(--admin-components-default-color-text));
+    cursor: pointer;
+    font-size: @const-font-size-default;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: var(--line-height, var(--admin-components-default-line-height));
+    word-break: break-word;
+  }
+}

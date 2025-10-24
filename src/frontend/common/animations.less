@@ -1,0 +1,82 @@
+/* Анимация появления меню под кнопками */
+@const-animation-menu-appear: menu-appear-animation;
+
+@keyframes @const-animation-menu-appear {
+  0% {
+    box-shadow: none;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  30% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Анимация вращения иконки загрузки */
+@const-animation-loader-rotation: loader-rotation;
+
+@keyframes @const-animation-loader-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Анимация появления затенения окна */
+@const-animation-backdrop-appear: backdrop-appear-animation;
+
+@keyframes @const-animation-backdrop-appear {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Анимация появления блока */
+@const-animation-block-appear: block-appear-animation;
+
+@keyframes @const-animation-block-appear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Анимация появления модального окна */
+@const-animation-modal-appear: modal-appear-animation;
+
+@keyframes @const-animation-modal-appear {
+  0% {
+    box-shadow: none;
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  30% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

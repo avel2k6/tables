@@ -1,0 +1,39 @@
+@import '../../common/animations';
+
+.cons-loader {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: #fff;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  transition: all 0.1s;
+
+  &_spinner {
+    position: sticky;
+    border: 5px solid #a1a1a1;
+    border-bottom-color: transparent;
+    animation: @const-animation-loader-rotation 1s linear infinite;
+    background-color: #0000;
+  }
+
+  &_success {
+    border: 5px solid var(--color-confirm, var(--admin-components-default-color-confirm));
+    background-color: var(--color-confirm, var(--admin-components-default-color-confirm));
+    background-image: url('../../icons/check-white.svg');
+  }
+
+  &_warning {
+    border: 5px solid var(--color-danger, var(--admin-components-default-color-danger));
+    background-color: var(--color-danger, var(--admin-components-default-color-danger));
+    background-image: url('../../icons/x-white.svg');
+  }
+
+  &_small {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+}

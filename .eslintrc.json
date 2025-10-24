@@ -5,14 +5,7 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:import/recommended",
-    "plugin:import/electron",
-    "plugin:import/typescript",
-    "plugin:react/recommended",
-    "airbnb",
+    "airbnb-base",
     "airbnb-typescript"
   ],
   "parser": "@typescript-eslint/parser",
@@ -31,12 +24,13 @@
   "rules": {
     "@typescript-eslint/indent": ["error", 4, { "SwitchCase": 1 }],
     "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
-    "react/jsx-indent": ["error", 4],
-    "react/jsx-indent-props": ["error", 4],
-    "react/function-component-definition": [2, { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }],
-    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "class-methods-use-this": 0,
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/prefer-default-export": "off",
+    "max-len": ["error", { "code": 150 }],
     "no-console": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "no-plusplus": 0,
+    "react/jsx-filename-extension": 0
   }
 }

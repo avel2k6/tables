@@ -1,0 +1,144 @@
+@import '../../common/variables';
+
+.cons-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-sm, var(--admin-components-default-padding-sm));
+  border: 0;
+  border-radius: 4px;
+  appearance: none;
+  box-shadow: 0 0 0 1px #000;
+  color: #fff;
+  cursor: pointer;
+  font-size: @const-font-size-default;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: var(--line-height, var(--admin-components-default-line-height));
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    filter: brightness(0.95);
+  }
+
+  &:hover .icons {
+    background-color: @const-icon-default-hover-background-color;
+  }
+
+  /* Нужен, чтобы подсвечивать кнопки, когда на них падает автофокус. Но, при этом, не подсвечивать, когда кликаем по той же кнопке мышкой. */
+  &:focus:not(:active) {
+    outline: 2px solid var(--color-outline, var(--admin-components-default-color-outline));
+  }
+
+  &_primary {
+    background-color: var(--color-primary, var(--admin-components-default-color-primary));
+    box-shadow: 0 0 0 1px var(--color-primary-border, var(--admin-components-default-color-primary-border));
+    color: #fff;
+
+    &:hover {
+      background-color: var(--color-primary-hover, var(--admin-components-default-color-primary-hover));
+      box-shadow: 0 0 0 1px var(--color-primary-hover-border, var(--admin-components-default-color-primary-hover-border));
+    }
+
+    &:active {
+      box-shadow: 0 0 0 1px var(--color-primary-hover-border, var(--admin-components-default-color-primary-hover-border)), inset 0 2px 3px -2px #000;
+    }
+  }
+
+  &_secondary {
+    background-color: var(--color-secondary, var(--admin-components-default-color-secondary));
+    box-shadow: 0 0 0 1px var(--color-secondary-border, var(--admin-components-default-color-secondary-border));
+    color: var(--color-text, var(--admin-components-default-color-text));
+
+    &:hover {
+      box-shadow: 0 0 0 1px var(--color-secondary-hover-border, var(--admin-components-default-color-secondary-hover-border));
+    }
+
+    &:active {
+      box-shadow: 0 0 0 1px var(--color-secondary-hover-border, var(--admin-components-default-color-secondary-hover-border)), inset 0 2px 3px -2px #000;
+    }
+  }
+
+  &_confirm {
+    background-color: var(--color-confirm, var(--admin-components-default-color-confirm));
+    box-shadow: 0 0 0 1px var(--color-confirm-border, var(--admin-components-default-color-confirm-border));
+    color: #fff;
+
+    &:hover {
+      background-color: var(--color-confirm-hover, var(--admin-components-default-color-confirm-hover));
+      box-shadow: 0 0 0 1px var(--color-confirm-hover-border, var(--admin-components-default-color-confirm-hover-border));
+    }
+
+    &:active {
+      box-shadow: 0 0 0 1px var(--color-confirm-hover-border, var(--admin-components-default-color-confirm-hover-border)), inset 0 2px 3px -2px #000;
+    }
+  }
+
+  &_danger {
+    background-color: var(--color-danger, var(--admin-components-default-color-danger));
+    box-shadow: 0 0 0 1px var(--color-danger-border, var(--admin-components-default-color-danger-border));
+    color: #fff;
+
+    &:hover {
+      background-color: var(--color-danger-hover, var(--admin-components-default-color-danger-hover));
+      box-shadow: 0 0 0 1px var(--color-danger-hover-border, var(--admin-components-default-color-danger-hover-border));
+    }
+
+    &:active {
+      box-shadow: 0 0 0 1px var(--color-danger-hover-border, var(--admin-components-default-color-danger-hover-border)), inset 0 2px 3px -2px #000;
+    }
+  }
+
+  &_transparent {
+    background-color: var(--color-transparent, var(--admin-components-default-color-transparent));
+    box-shadow: 0 0 0 1px var(--color-transparent, var(--admin-components-default-color-transparent));
+    color: #000;
+  }
+
+  &_link {
+    background-color: #0000;
+    box-shadow: 0 0 0 1px #0000;
+    color: #0056cc;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &_info {
+    background-color: var(--color-info, var(--admin-components-default-color-info));
+    box-shadow: 0 0 0 1px var(--color-info-border, var(--admin-components-default-color-info-border-color-confirm));
+
+    &:hover {
+      background-color: var(--color-info-hover, var(--admin-components-default-color-info-hover));
+      box-shadow: 0 0 0 1px var(--color-info-hover-border, var(--admin-components-default-color-info-hover-border));
+    }
+
+    &:active {
+      box-shadow: 0 0 0 1px var(--color-info-hover-border, var(--admin-components-default-color-info-hover-border)), inset 0 2px 3px -2px #000;
+    }
+  }
+
+  &_disabled {
+    cursor: default;
+    opacity: 0.5;
+    pointer-events: none;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &_small-padding {
+    padding: 6px;
+  }
+
+  &_full-width {
+    width: 100%;
+  }
+}

@@ -1,0 +1,125 @@
+@import '../../common/animations';
+@import '../../common/variables';
+@import '../../common/z-indexes';
+@import '../../common/scrollbar';
+
+.cons-select {
+  position: relative;
+
+  &_w-small {
+    width: 250px;
+  }
+
+  &_w-medium {
+    width: 400px;
+  }
+
+  &_w-full {
+    width: 100%;
+  }
+
+  &__button {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: 32px;
+    box-sizing: border-box;
+    padding: 6px 24px 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px var(--color-border, var(--admin-components-default-color-border));
+    cursor: pointer;
+    font-size: @const-font-size-default;
+    letter-spacing: 0;
+    line-height: var(--line-height, var(--admin-components-default-line-height));
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      box-shadow: 0 0 0 1px var(--color-border-hover, var(--admin-components-default-color-border-hover));
+    }
+
+    &_filled {
+      box-shadow: 0 0 0 1px var(--color-filled, var(--admin-components-default-color-filled));
+    }
+
+    &_error {
+      box-shadow: 0 0 0 1px var(--color-danger, var(--admin-components-default-color-danger));
+    }
+
+    &_active {
+      box-shadow: 0 0 0 1px var(--color-focus, var(--admin-components-default-color-focus));
+    }
+
+    &_placeholder {
+      color: var(--color-placeholder, var(--admin-components-default-color-placeholder));
+    }
+
+    &_small {
+      min-height: 28px;
+      padding: 4px 17px 4px 11px;
+    }
+
+    &::after {
+      position: absolute;
+      top: 7px;
+      right: 8px;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-image: url('../../icons/chevron.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      content: '';
+    }
+
+    &_small::after {
+      top: 5px;
+    }
+  }
+
+  &__options {
+    position: absolute;
+    z-index: @const-select-options;
+    top: 37px;
+    overflow: auto;
+    width: max-content;
+    max-width: 400px;
+    max-height: 350px;
+    padding: 15px 0;
+    border-radius: 8px;
+    animation: @const-animation-menu-appear 0.2s;
+    background-color: #fff;
+    box-shadow: @const-select-box-shadow;
+
+    @scrollbar-ruleset();
+  }
+
+  &__option {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    appearance: none;
+    background: #0000;
+    color: #000;
+    cursor: pointer;
+    font-weight: 400;
+    text-align: left;
+    white-space: normal;
+    word-break: break-word;
+
+    &_selected {
+      color: var(--color-active, var(--admin-components-default-color-active));
+    }
+
+    &:hover {
+      background-color: var(--color-hover, var(--admin-components-default-color-hover));
+    }
+  }
+}

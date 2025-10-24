@@ -1,0 +1,91 @@
+@import '../../common/animations';
+@import '../../common/z-indexes';
+@import '../../common/scrollbar';
+@import '../../common/variables';
+
+.cons-multi-select {
+  position: relative;
+
+  &_w-small {
+    width: 250px;
+  }
+
+  &_w-medium {
+    width: 400px;
+  }
+
+  &_w-full {
+    width: 100%;
+  }
+
+  &__button {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: var(--padding-sm, var(--admin-components-default-padding-sm));
+    border: 0 solid var(--color-border, var(--admin-components-default-color-border));
+    border-radius: var(--border-radius-sm, var(--admin-components-default-border-radius-sm));
+    background-color: #fff;
+    box-shadow: 0 0 0 1px var(--color-border, var(--admin-components-default-color-border));
+    cursor: pointer;
+    font-size: @const-font-size-default;
+    line-height: var(--line-height, var(--admin-components-default-line-height));
+    text-align: left;
+
+    &:hover {
+      box-shadow: 0 0 0 1px var(--color-border-hover, var(--admin-components-default-color-border-hover));
+    }
+
+    &_filled {
+      box-shadow: 0 0 0 1px var(--color-filled, var(--admin-components-default-color-filled));
+    }
+
+    &_error {
+      box-shadow: 0 0 0 1px var(--color-danger, var(--admin-components-default-color-danger));
+    }
+
+    &_active {
+      box-shadow: 0 0 0 1px var(--color-focus, var(--admin-components-default-color-focus));
+    }
+
+    &_placeholder {
+      color: var(--color-placeholder, var(--admin-components-default-color-placeholder));;
+    }
+
+    &::after {
+      position: absolute;
+      top: 7px;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      background: url('../../icons/chevron.svg') center / cover no-repeat;
+      content: '';
+    }
+  }
+
+  &__options {
+    position: absolute;
+    z-index: @const-select-options;
+    top: 37px;
+    overflow: auto;
+    width: max-content;
+    max-width: 400px;
+    max-height: 350px;
+    padding: 12px;
+    border-radius: var(--border-radius-sm, var(--admin-components-default-border-radius-sm));
+    animation: @const-animation-menu-appear 0.2s;
+    background-color: #fff;
+    box-shadow: @const-select-box-shadow;
+
+    @scrollbar-ruleset();
+  }
+
+  &__option {
+    width: auto;
+  }
+
+  &_error {
+    box-shadow: 0 0 0 1px var(--color-danger, var(--admin-components-default-color-danger));
+  }
+}

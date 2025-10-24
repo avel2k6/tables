@@ -1,0 +1,26 @@
+/* Названия наборов правил оканчиваем на '-ruleset' */
+
+@scrollbar-ruleset: {
+  &::-webkit-scrollbar { /* stylelint-disable-line nesting-selector-no-missing-scoping-root */
+    width: 16px;
+  }
+
+  &::-webkit-scrollbar-track { /* stylelint-disable-line nesting-selector-no-missing-scoping-root */
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb { /* stylelint-disable-line nesting-selector-no-missing-scoping-root */
+    border: 3px solid transparent;
+    border-radius: 8px;
+    background-clip: content-box;
+    background-color: #e9ecef;
+
+    &:hover {
+      background-color: #ced4da;
+    }
+
+    &:active {
+      background-color: #6c757d;
+    }
+  }
+}

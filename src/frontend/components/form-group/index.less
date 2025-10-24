@@ -1,0 +1,59 @@
+@import '../../common/variables';
+
+.cons-form-group {
+  display: flex;
+  min-height: 32px;
+  flex-flow: row;
+  margin-bottom: 20px;
+
+  &_column {
+    flex-flow: column;
+  }
+
+  &_disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &__label {
+    min-width: 238px;
+    padding: 6px 0;
+    font-size: @const-font-size-default;
+    font-weight: var(--font-weight-form-group-label, var(--admin-components-default-font-weight-form-group-label));
+    letter-spacing: 0;
+    line-height: var(--line-height, var(--admin-components-default-line-height));
+    text-align: left;
+
+    &_column {
+      width: 100%;
+      padding: 0;
+      margin-bottom: 4px;
+    }
+
+    &_required::after {
+      margin-left: 5px;
+      color: var(--color-danger, var(--admin-components-default-color-danger));
+      content: '*';
+    }
+  }
+
+  &__comment {
+    margin-top: 5px;
+    word-break: break-word;
+  }
+
+  &__error {
+    margin-top: 5px;
+    color: var(--color-danger, var(--admin-components-default-color-danger));
+    word-break: break-word;
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__text {
+    padding: 6px 0;
+    line-height: var(--line-height, var(--admin-components-default-line-height));
+  }
+}

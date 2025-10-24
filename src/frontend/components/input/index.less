@@ -1,0 +1,115 @@
+@import '../../common/z-indexes';
+@import '../../common/variables';
+
+.cons-input {
+  position: relative;
+  display: flex;
+  border: none;
+  border-radius: var(--border-radius-sm, var(--admin-components-default-border-radius-sm));
+  box-shadow: 0 0 0 1px var(--color-border, var(--admin-components-default-color-border));
+
+  &_small {
+    font-size: @const-font-size-small;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 1px var(--color-border-hover, var(--admin-components-default-color-border-hover));
+  }
+
+  &:active, &:focus, &:focus-within {
+    box-shadow: 0 0 0 1px var(--color-focus, var(--admin-components-default-color-focus));
+  }
+
+  &_filled {
+    box-shadow: 0 0 0 1px var(--color-filled, var(--admin-components-default-color-filled));
+  }
+
+  &_error {
+    box-shadow: 0 0 0 1px var(--color-danger, var(--admin-components-default-color-danger));
+  }
+
+  &_counter {
+    margin-bottom: 14px;
+  }
+
+  &_w-small {
+    width: 250px;
+  }
+
+  &_w-medium {
+    width: 400px;
+  }
+
+  &_w-full {
+    width: 100%;
+  }
+
+  &__icon {
+    display: block;
+    width: 40px;
+    min-width: 40px;
+    height: 32px;
+    border-radius:
+            var(--border-radius-sm, var(--admin-components-default-border-radius-sm))
+            0
+            0
+            var(--border-radius-sm, var(--admin-components-default-border-radius-sm));
+    border-right: 1px solid var(--color-border, var(--admin-components-default-color-border));
+    background-color: #E9ECEF;
+    background-position: center;
+    background-repeat: no-repeat;
+    content: ' ';
+
+    &_search {
+      background-image: url("../../icons/search.svg");
+    }
+  }
+
+  &:hover &__icon {
+    border-right: 1px solid var(--color-border-hover, var(--admin-components-default-color-border-hover));
+  }
+
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 11px;
+    border: 0 solid #fff;
+    border-radius: var(--border-radius-sm, var(--admin-components-default-border-radius-sm));
+    font-size: @const-font-size-default;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: var(--line-height, var(--admin-components-default-line-height));
+    outline: none;
+    text-align: left;
+
+    &::placeholder {
+      color: var(--color-placeholder, var(--admin-components-default-color-placeholder));
+    }
+
+    &_small {
+      padding: 4px 11px;
+      font-size: @const-font-size-small;
+    }
+
+    &_disabled {
+      background-color: #e9ecef;
+    }
+  }
+
+  &__counter {
+    position: absolute;
+    top: 34px;
+    right: 0;
+    color: #6C757D;
+    font-size: @const-font-size-small;
+  }
+
+  &__clear {
+    z-index: @const-clear-input-button;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,15 @@
+export const classes = {
+    component: 'cons-page',
+    breadcrumbs: 'cons-page__breadcrumbs',
+    header: 'cons-page__header',
+    title: 'cons-page__title',
+    filter: 'cons-page__filter',
+    counter: 'cons-page__counter',
+    counterSeparator: 'cons-page__counter-separator',
+    list: 'cons-page__list',
+    pagination: 'cons-page__pagination',
+    form: 'cons-page__form',
+    formButtons: 'cons-page__form-buttons',
+    dummy: 'cons-page__dummy',
+    block: 'cons-page__block',
+};
