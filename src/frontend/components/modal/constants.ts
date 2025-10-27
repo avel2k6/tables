@@ -1,7 +1,8 @@
 export const texts = {
+    confirm: 'Ок',
+    cancel: 'Отмена',
     close: 'Закрыть',
 };
-
 export const classes = {
     component: 'cons-modal',
     wrapper: 'cons-modal__wrapper',
@@ -28,4 +29,12 @@ export const modalSizes = {
 
 export const roles = {
     dialog: 'dialog',
+};
+
+// Дефолтные тексты для окна подтверждения
+export const confirmDefaultTexts = {
+    title: '',
+    body: 'Подтвердите действие',
+    confirm: 'Ок',
+    cancel: 'Отмена',
 };

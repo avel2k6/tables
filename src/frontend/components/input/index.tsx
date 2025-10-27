@@ -9,18 +9,39 @@ import {
 import { TInputProps } from './interfaces';
 import './index.less';
 
+console.log('123');
 /**
  * Компонент инпута с кнопкой очистки и отображением количества символов
  * @component
  */
-export const Input = (props: TInputProps) => {
+export const Input = ({
+    type = inputTypes.TEXT,
+    size = inputSize.DEFAULT,
+    hasFilledStyle = false,
+    hasClearButton = true,
+    hasError = false,
+    readOnly = false,
+    disabled = false,
+    onChange = () => {},
+    onBlur = () => {},
+    onKeyDown = () => {},
+    maxLength,
+    value,
+    className,
+    width,
+    id,
+    dataTestId,
+    icon,
+    title,
+    placeholder,
+    min,
+    autoFocus,
+}: TInputProps) => {
     /**
      * Обработка полученного value в зависимотсти от типа инпута
      * @returns {string} Обработанное value
      */
     const getCorrectValue = (): string => {
-        const { value, type } = props;
-
         if (type === inputTypes.NUMBER) {
             return value
                 ? value.toString()
@@ -38,32 +59,32 @@ export const Input = (props: TInputProps) => {
      * @param {React.ChangeEvent<HTMLInputElement>} e - Событие изменения значения инпута
      */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
+        const newValue = e.target.value;
 
-        if (props.type === inputTypes.NUMBER) {
-            props.onChange(value || '0');
+        if (type === inputTypes.NUMBER) {
+            onChange(newValue || '0');
             return;
         }
 
         // Обрезаем строку, несмотря на такую же возможность в браузере. Чтобы работало наверняка и можно было протестировать
-        props.onChange(value.substring(0, props.maxLength || value.length));
+        onChange(newValue.substring(0, maxLength || newValue.length));
     };
 
     /**
      * Потеря фокуса инпута
      */
-    const handleBlur = () => props.onBlur(props.value);
+    const handleBlur = () => onBlur(value);
 
     /**
      * Нажатие на клавишу
      * @param {React.KeyboardEvent<HTMLInputElement>} e - Событие нажатия на клавишу в инпуте
      */
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => props.onKeyDown(e);
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => onKeyDown(e);
 
     /**
      * Очистка инпута
      */
-    const handleClearInput = () => props.onChange('');
+    const handleClearInput = () => onChange('');
 
     // Строчное значение инпута для оригинального элемента
     const valueForInput = getCorrectValue();
@@ -71,63 +92,48 @@ export const Input = (props: TInputProps) => {
     return <div
         className={classNames({
             [classes.component]: true,
-            [classes.smallSize]: props.size === inputSize.SMALL,
-            [props.className]: !!props.className,
-            [classes.withCounter]: !!props.maxLength,
-            [classes.error]: props.hasError,
-            [classes.small]: props.width === inputWidth.SMALL,
-            [classes.medium]: props.width === inputWidth.MEDIUM,
-            [classes.full]: props.width === inputWidth.FULL,
-            [classes.filled]: props.hasFilledStyle && !!valueForInput,
-            [classes.disabled]: props.disabled,
+            [classes.smallSize]: size === inputSize.SMALL,
+            [className]: !!className,
+            [classes.withCounter]: !!maxLength,
+            [classes.error]: hasError,
+            [classes.small]: width === inputWidth.SMALL,
+            [classes.medium]: width === inputWidth.MEDIUM,
+            [classes.full]: width === inputWidth.FULL,
+            [classes.filled]: hasFilledStyle && !!valueForInput,
+            [classes.disabled]: disabled,
         })}
-        id={props.id}
-        data-testid={props.dataTestId}>
-        {props.icon
+        id={id}
+        data-testid={dataTestId}>
+        {icon
             ? <div className={classNames({
                 [classes.icon]: true,
-                [classes.iconSearch]: props.icon === 'search',
+                [classes.iconSearch]: icon === 'search',
             })}/>
             : null}
         <input
             className={classNames({
                 [classes.input]: true,
-                [classes.inputSmall]: props.size === inputSize.SMALL,
+                [classes.inputSmall]: size === inputSize.SMALL,
             })}
-            title={props.title}
+            title={title}
             onChange={handleChange}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
-            type={props.type}
-            placeholder={props.placeholder}
+            type={type}
+            placeholder={placeholder}
             value={valueForInput}
-            maxLength={props.maxLength}
-            min={props.min}
-            readOnly={props.readOnly}
-            autoFocus={props.autoFocus}
-            disabled={props.disabled}/>
-        {props.hasClearButton && !props.disabled && valueForInput.length
+            maxLength={maxLength}
+            min={min}
+            readOnly={readOnly}
+            autoFocus={autoFocus}
+            disabled={disabled}/>
+        {hasClearButton && !disabled && valueForInput.length
             ? <span className={classes.clear} onClick={handleClearInput}>
                 <Icons.Close color='red'/>
             </span>
             : null}
-        {props.maxLength
-            ? <span className={classes.counter}>{`${valueForInput.length} ${texts.outOf} ${props.maxLength}`}</span>
+        {maxLength
+            ? <span className={classes.counter}>{`${valueForInput.length} ${texts.outOf} ${maxLength}`}</span>
             : null}
     </div>;
 };
-
-const defaultProps: Partial<TInputProps> = {
-    type: inputTypes.TEXT,
-    size: inputSize.DEFAULT,
-    hasFilledStyle: false,
-    hasClearButton: true,
-    hasError: false,
-    readOnly: false,
-    disabled: false,
-    onChange: () => {},
-    onBlur: () => {},
-    onKeyDown: () => {},
-};
-
-Input.defaultProps = defaultProps;

@@ -33,7 +33,7 @@ export type TFormGroupProps = {
 
 export type TFormGroupTextProps = {
     // Дети. Ожидаем, что будет обычный текст
-    children: React.ReactText,
+    children: React.ReactNode | React.ReactNode[] | null,
 
     // ID для тестирования
     dataTestId?: string,

@@ -5,8 +5,11 @@ export type TCommonListContext<TList, TFilter, TSort> = {
     // Элементы листинга
     list: TList,
 
-    // Колбэк загрузки нового листинга на основе текущего фильтра
-    updateList: () => Promise<void>,
+    // Колбэк изменения листинга
+    updateList: (rowId: string, col: number, text: string) => Promise<void>,
+
+    // Установка редактируемого элемента
+    setColEditData: (rowId: string, col: number, text: string) => void,
 
     // Текущее состояние фильтра
     filter?: TFilter,

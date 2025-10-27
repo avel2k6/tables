@@ -1,4 +1,12 @@
 import React from 'react';
+import { modalSizes } from './constants';
+
+export type TModalPortalProps = {
+    children: React.ReactNode,
+    isShow: boolean,
+    size?: typeof modalSizes[keyof typeof modalSizes]
+    onHide: () => void,
+};
 
 /**
  * Тип пропса для выравнивания контента
@@ -65,7 +73,7 @@ export type THeaderProps = TAlign & TCommonProps & TDataTestId & {
  */
 export type TTitleProps = TDataTestId & {
     // Дети
-    children: React.ReactText,
+    children: string,
 
     // Дополнительный CSS-class компонента
     className?: string,
@@ -80,3 +88,32 @@ export type TBodyProps = TAlign & TCommonProps & TDataTestId;
  * Тип пропсов у Footer
  */
 export type TFooterProps = TAlign & TCommonProps & TDataTestId;
+
+export type TConfirmProps = {
+    // Признак показано ли окно
+    isShow: boolean,
+
+    // Заголовок окна
+    title: string,
+
+    // Тело окна
+    body: React.ReactNode,
+
+    // Колбек скрытия окна
+    onHide: () => void,
+
+    // Колбек подтверждения окна
+    onConfirm: () => void,
+
+    // Тест кнопки подтверждения
+    confirm?: string,
+
+    // Тест кнопки отмены
+    cancel?: string,
+
+    // Кнопка подтверждения disabled или нет
+    isDisabledConfirmButton?: boolean,
+
+    // Имя CSS-класса для body модального окна
+    bodyClassname?: string,
+};

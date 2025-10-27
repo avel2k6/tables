@@ -41,6 +41,8 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-webpack-plugin": "^5.0.2",
     "fork-ts-checker-webpack-plugin": "^7.3.0",
+    "less": "^4.4.2",
+    "less-loader": "^12.3.0",
     "node-loader": "^2.1.0",
     "style-loader": "^3.3.4",
     "ts-loader": "^9.5.4",
