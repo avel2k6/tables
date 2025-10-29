@@ -5,7 +5,7 @@ import { Theme } from './constants';
  */
 export type TNotification = {
     // ID уведомления
-    id: number,
+    id: string,
 
     // текст уведомления
     text: string,
@@ -25,7 +25,7 @@ export type TNotification = {
  */
 export type TNotificationProps = {
     // ID уведомления
-    id: number,
+    id: string,
 
     // текст уведомления
     text: string,
@@ -40,7 +40,7 @@ export type TNotificationProps = {
     theme: Theme,
 
     // колбэк для закрытия уведомления
-    onClose: (id: number) => void,
+    onClose: (id: string) => void,
 };
 
 /**

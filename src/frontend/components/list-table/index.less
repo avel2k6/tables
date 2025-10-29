@@ -5,14 +5,10 @@
   height: max-content;
   animation: @const-animation-block-appear 0.2s;
   border-collapse: collapse;
-  table-layout:fixed;
+  table-layout: fixed;
 
   &__tr {
-    border-bottom: 1px solid #DEE2E6;
-  }
-
-  &__tr:nth-child(odd) {
-    background-color: var(--odd-background-color-tr, var(--admin-components-default-odd-background-color-tr));
+    border-bottom: 1px solid #a1a1a1;
   }
 
   &__td {
@@ -20,7 +16,7 @@
     line-height: 20px;
     text-align: left;
     vertical-align: top;
-    word-break: break-word;
+    border: 1px solid;
   }
 
   &__th {
@@ -32,6 +28,7 @@
     font-weight: bold;
     line-height: 20px;
     text-align: left;
+    width: 100px;
   }
 
   &__th-wrapper {

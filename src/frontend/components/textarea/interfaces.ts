@@ -7,6 +7,9 @@ export type TProps = {
     // Дополнительный CSS-class для <textarea>.
     className?: string;
 
+    // Дополнительный CSS-class для компонента.
+    blockClassName?: string,
+
     // ID компонента.
     id?: string;
 

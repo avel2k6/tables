@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { TNotification} from "./interfaces";
+import { TNotification } from './interfaces';
 import { generateId, isCustomEvent } from '../../utils';
 import { classes, texts, Theme } from './constants';
-import { subscribe, unsubscribe} from "./eventManager";
+import { subscribe, unsubscribe } from './eventManager';
 import { Notification } from './Notification';
+import './index.less';
 
 /**
  * Контейнер, который занимается созданием и удалением уведомлений
@@ -49,7 +50,7 @@ export const NotificationContainer = () => {
      * Удаление уведомления из очереди
      * @param {number} id - ID уведомления
      */
-    const handleClose = (id: number) => setNotifications(
+    const handleClose = (id: string) => setNotifications(
         (prevNotifications) => prevNotifications.filter((item) => item.id !== id),
     );
 

@@ -20,6 +20,7 @@ export const Body = ({
         className={classNames(classes.body, className, {
             [classes.bodyRight]: align === 'right',
             [classes.bodyFullscreen]: size === modalSizes.FULLSCREEN,
+            [classes.bodyTab]: size === modalSizes.TAB,
         })}
         data-testid={dataTestId}>
         <ErrorBoundary>

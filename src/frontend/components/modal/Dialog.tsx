@@ -18,6 +18,7 @@ export const Dialog = ({ dataTestId, children }: TDialogProps) => {
         className={classNames({
             [classes.dialog]: true,
             [classes.dialogFullscreen]: size === modalSizes.FULLSCREEN,
+            [classes.dialogTab]: size === modalSizes.TAB,
         })}
         role={roles.dialog}
         data-testid={dataTestId}>

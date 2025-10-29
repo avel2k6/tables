@@ -1,0 +1,29 @@
+.editable-list {
+  &__active-row {
+    background: #94c4ff;
+  }
+
+  &__cell {
+    max-height: 200px;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+  }
+
+  &__textarea-block {
+    width: 100%!important;
+    height: 100%!important;
+    padding: 0!important;
+    border-radius: 0!important;
+  }
+
+  &__textarea {
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0!important;
+    border-radius: 0!important;
+  }
+}

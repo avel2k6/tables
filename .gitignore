@@ -93,3 +93,6 @@ out/
 
 #Jetbrains
 .idea/
+
+# Custom data files
+data/

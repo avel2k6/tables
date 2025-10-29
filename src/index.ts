@@ -1,4 +1,6 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import {
+    app, BrowserWindow, ipcMain, Menu,
+} from 'electron';
 import * as fs from 'node:fs';
 import { parse } from 'csv-parse/sync';
 
@@ -16,11 +18,28 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 const createWindow = (): void => {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
-        height: 600,
-        width: 800,
+        height: 768,
+        width: 1024,
+        titleBarStyle: 'hidden',
+        autoHideMenuBar: true,
+        titleBarOverlay: {
+            color: '#fff',
+            symbolColor: '#a1a1a1',
+            height: 30,
+        },
         webPreferences: {
             preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
         },
+        ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
+    });
+    const menu = Menu.buildFromTemplate([
+        { role: 'copy' },
+        { role: 'cut' },
+        { role: 'paste' },
+    ]);
+
+    mainWindow.webContents.on('context-menu', () => {
+        menu.popup();
     });
 
     // and load the index.html of the app.
@@ -65,7 +84,6 @@ ipcMain.handle('read-file', async (event, filePath: string) => {
     console.log('try to read file', filePath);
     try {
         const data = fs.readFileSync(filePath, 'utf8');
-        console.log('success', data);
         if (filePath.endsWith('.csv')) {
             const parsedData = JSON.stringify(parse(data, { delimiter: ';' }));
             return { success: true, data: parsedData };

@@ -20,6 +20,7 @@ export const Wrapper = ({ dataTestId, children }: TWrapperProps) => {
             className={classNames({
                 [classes.wrapper]: true,
                 [classes.wrapperFullscreen]: size === modalSizes.FULLSCREEN,
+                [classes.wrapperTab]: size === modalSizes.TAB,
             })}
             data-testid={dataTestId}>
             <div className={classes.backdrop} />

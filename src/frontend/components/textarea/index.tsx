@@ -9,39 +9,55 @@ import './index.less';
  * Компонент, представляющий собой тег <textarea>.
  * @component
  */
-export const Textarea = (props: TProps) => {
+export const Textarea = ({
+    id,
+    dataTestId,
+    className,
+    placeholder,
+    value = '',
+    onBlur = () => {},
+    onKeyDown = () => {},
+    onChange = () => {},
+    rows = 1,
+    hasError = false,
+    name,
+    readOnly,
+    disabled,
+    autoFocus,
+    blockClassName,
+}: TProps) => {
     /**
      * Обработчик ввода в textarea.
      * @param e - Событие ввода в textarea.
      */
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => props.onChange(e.target.value);
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value);
 
     /**
      * Потеря фокуса в textarea.
      */
-    const handleBlur = () => props.onBlur(props.value);
+    const handleBlur = () => onBlur(value);
 
     /**
      * Нажатие на клавишу.
      * @param e - Событие нажатия на клавишу в textarea.
      */
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => props.onKeyDown(e);
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => onKeyDown(e);
 
-    return <div className={classNames(classes.component, { [classes.error]: props.hasError })}>
+    return <div className={classNames(classes.component, { [classes.error]: hasError }, blockClassName)}>
         <textarea
-            id={props.id}
-            data-testid={props.dataTestId}
-            className={classNames(classes.textarea, props.className)}
-            rows={props.rows}
-            value={props.value}
-            name={props.name}
+            id={id}
+            data-testid={dataTestId}
+            className={classNames(classes.textarea, className)}
+            rows={rows}
+            value={value}
+            name={name}
             onChange={handleChange}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
-            placeholder={props.placeholder}
-            readOnly={props.readOnly}
-            disabled={props.disabled}
-            autoFocus={props.autoFocus}
+            placeholder={placeholder}
+            readOnly={readOnly}
+            disabled={disabled}
+            autoFocus={autoFocus}
         />
     </div>;
 };

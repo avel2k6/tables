@@ -1,0 +1,40 @@
+.pagination {
+  &__item {
+    min-width: 34px;
+    height: 36px;
+    padding: 7px;
+    border: 1px solid #DEE2E6;
+    border-left: 0;
+    background-color: #fff;
+    color: #212529;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 20px;
+    text-align: center;
+
+    &:hover {
+      background-color: #F5F5F5;
+    }
+
+    &:first-child {
+      border-radius: 4px 0 0 4px;
+      border-left: 1px solid rgb(222 226 230 / 100%);
+    }
+
+    &:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    &_active {
+      border: 1px solid rgb(232 219 255 / 100%);
+      background-color: rgb(232 219 255 / 100%);
+    }
+
+    &_disabled {
+      color: #21252980;
+      cursor: default;
+    }
+  }
+}
