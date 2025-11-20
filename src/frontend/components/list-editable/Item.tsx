@@ -1,9 +1,13 @@
-import { useContext, useState } from 'react';
+import {
+    useContext, useLayoutEffect, useRef, useState,
+} from 'react';
 import { MainListContext } from '../../contexts/mail-list-context';
 import { TEditData } from '../../domains/EditData';
 import { Textarea } from '../textarea';
 import { classes } from './constants';
 import { ColEditor } from '../col-editor';
+import { dataAttributes } from '../data-attributes';
+import { customEvents } from '../custom-events';
 
 export const Item = ({
     currentRowId = '',
@@ -15,14 +19,29 @@ export const Item = ({
     const [isEditable, setIsEditable] = useState<boolean>(false);
     const [editData, setEditData] = useState<TEditData>(null);
     const [editText, setEditText] = useState<string>(currentTextText);
+    const cellElement = useRef<HTMLDivElement>(null);
 
-    const handleDoubleClick = (rowId: string, colIndex: number, text: string) => () => {
+    const handleShowMenu = (event: CustomEvent) => {
+        if (!event.detail.cell) {
+            return;
+        }
+
+        if (event.detail.cell.rowId !== currentRowId || event.detail.cell.colIndex !== currentColIndex) {
+            return;
+        }
+
         setEditData({
-            rowId,
-            colIndex,
-            text,
+            rowId: currentRowId,
+            colIndex: currentColIndex,
+            text: currentTextText,
         });
     };
+    useLayoutEffect(() => {
+        document.addEventListener(customEvents.CELL_MENU, handleShowMenu);
+        return () => {
+            document.removeEventListener(customEvents.CELL_MENU, handleShowMenu);
+        };
+    }, []);
 
     const handleSaveEdit = async (rowId: string, colIndex: number, text: string) => {
         await updateList(rowId, colIndex, text);
@@ -35,7 +54,10 @@ export const Item = ({
         setIsEditable(false);
     };
 
-    const handleClick = () => {
+    const handleEdit = () => {
+        if (isEditable) {
+            return;
+        }
         setIsEditable(true);
         setEditText(currentTextText);
     };
@@ -49,12 +71,19 @@ export const Item = ({
         await updateList(currentRowId, currentColIndex, editText);
     };
 
+    const attributes = {
+        [dataAttributes.dataColIndex]: currentColIndex,
+        [dataAttributes.dataRowId]: currentRowId,
+    };
+
     return <>
         <div
+            {...attributes}
+            ref={cellElement}
             tabIndex={0}
             className={classes.cell}
-            onClick={handleClick}
-            onDoubleClick={handleDoubleClick(currentRowId, currentColIndex, currentTextText)}>
+            // onAuxClick={handleShowMenu(currentRowId, currentColIndex, currentTextText)}
+            onDoubleClick={handleEdit}>
             {isEditable
                 ? <Textarea
                     autoFocus

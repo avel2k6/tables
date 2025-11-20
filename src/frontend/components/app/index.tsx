@@ -7,6 +7,7 @@ import { NotificationContainer } from '../notify/NotificationContainer';
 import { AppCommonProviders } from '../../contexts/AppCommonProviders';
 import { ErrorBoundary } from '../error-boundary';
 import { PageMain } from '../page-main';
+import { ContextMenu } from '../context-menu';
 
 /**
  * Общий компонент инициализации приложения.
@@ -15,6 +16,9 @@ import { PageMain } from '../page-main';
 export const App = () => <AppCommonProviders>
     <ErrorBoundary>
         <PageMain/>
+    </ErrorBoundary>
+    <ErrorBoundary>
+        <ContextMenu/>
     </ErrorBoundary>
     <NotificationContainer/>
 </AppCommonProviders>;

@@ -1,0 +1,36 @@
+.context-menu {
+  position: absolute;
+  z-index: 10000;
+  width: 240px;
+  padding: 12px 0;
+  line-height: 20px;
+  background-color: #fff;
+  border: solid 1px #dfdfdf;
+  box-shadow: 1px 1px 2px #cfcfcf;
+
+  &__item {
+    display: block;
+    margin: 0;
+    padding: 4px 12px;
+    color: #000;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    list-style: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #dfdfdf;
+    }
+
+    &_disabled {
+      color: #898989;
+      cursor: default;
+
+      &:hover {
+        color: #898989;
+        background-color: #fff;
+      }
+    }
+  }
+}

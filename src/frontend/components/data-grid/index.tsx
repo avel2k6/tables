@@ -7,12 +7,11 @@ import { useListingPagination } from '../../hooks/useListingPagination';
 import { Page } from '../page';
 import { MainListContext } from '../../contexts/mail-list-context';
 import { List } from '../list-editable';
-import {prepareList, TRow} from '../../domains/Row';
+import { prepareList, TRow } from '../../domains/Row';
 import { TEditData } from '../../domains/EditData';
 import { Pagination } from '../pagination';
-import { ColEditor } from '../col-editor';
-
-
+import { generateId } from '../../utils';
+import { customEvents } from '../custom-events';
 
 export const DataGrid = ({ filepath = null }: { filepath: string | null }) => {
     const [list, setList] = useState<TRow[]>([]);
@@ -48,16 +47,51 @@ export const DataGrid = ({ filepath = null }: { filepath: string | null }) => {
     };
 
     const updateList = async (rowId: string, col: number, text: string) => {
-        console.log(rowId, col, text);
         const rowIndex = list.findIndex((row) => row.id === rowId);
         if (rowIndex === -1) {
-            throw new Error(`Row with id ${rowId} not found`);
+            return;
         }
 
         const updatedList = [...list];
 
         updatedList[rowIndex].cols[col] = text;
         setList(updatedList);
+    };
+
+    /**
+     * 1
+     * @param event
+     */
+    const addRow = async (event: CustomEvent) => {
+        if (!event.detail.rowId) {
+            return;
+        }
+        const { rowId, type }: { rowId: string, type: 'before' | 'after' } = event.detail;
+
+        const rowIndex = list.findIndex((row) => row.id === rowId);
+
+        if (rowIndex === -1) {
+            return;
+        }
+
+        const newRow = {
+            id: generateId('list_'),
+            cols: [...Array(list[0].cols.length).fill('')],
+        }; if (type === 'before') {
+            list.splice(rowIndex, 0, newRow);
+        } else {
+            list.splice(rowIndex + 1, 0, newRow);
+        }
+        setList([...list]);
+    };
+
+    const removeRow = async (event: CustomEvent) => {
+        if (!event.detail.rowId) {
+            return;
+        }
+        const { rowId } = event.detail;
+        const filteredList = list.filter((row) => rowId !== row.id);
+        setList(filteredList);
     };
 
     const handleSetEditData = (rowId: string, colIndex: number, text: string) => {
@@ -67,6 +101,16 @@ export const DataGrid = ({ filepath = null }: { filepath: string | null }) => {
     useEffect(() => {
         fetchMainTable().finally();
     }, []);
+
+    useEffect(() => {
+        document.addEventListener(customEvents.REMOVE_ROW, removeRow);
+        document.addEventListener(customEvents.ADD_ROW, addRow);
+        return () => {
+            document.addEventListener(customEvents.REMOVE_ROW, removeRow);
+            document.addEventListener(customEvents.ADD_ROW, removeRow);
+        };
+    });
+
     return <Page>
         <MainListContext.Provider value={{
             list,

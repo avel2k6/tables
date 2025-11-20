@@ -20,8 +20,8 @@ const createWindow = (): void => {
     const mainWindow = new BrowserWindow({
         height: 768,
         width: 1024,
-        titleBarStyle: 'hidden',
-        autoHideMenuBar: true,
+        // titleBarStyle: 'hidden',
+        // autoHideMenuBar: true,
         titleBarOverlay: {
             color: '#fff',
             symbolColor: '#a1a1a1',
