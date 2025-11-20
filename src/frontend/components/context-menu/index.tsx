@@ -32,6 +32,9 @@ export const buttons = {
     addRowUp: 'Добавить строку 🠅',
     addRowDown: 'Добавить строку 🠇',
     print: 'Печать...',
+    addColumnLeft: 'Добавить столбец 🠄',
+    addColumnRight: 'Добавить столбец 🠆',
+    deleteColumn: 'Удалить столбец',
 } as const;
 
 export const ContextMenu = () => {
@@ -227,6 +230,28 @@ export const ContextMenu = () => {
         }));
     };
 
+    const handleDeleteColumn = () => {
+        document.dispatchEvent(new CustomEvent(customEvents.REMOVE_COLUMN, {
+            detail: {
+                colIndex: cell.colIndex,
+            },
+            bubbles: true,
+        }));
+        toggleMenuOff();
+    };
+
+    const handleAddColumn = (type: 'left' | 'right') => () => {
+        document.dispatchEvent(new CustomEvent(customEvents.ADD_COLUMN, {
+            detail: {
+                colIndex: cell.colIndex,
+                type,
+            },
+            bubbles: true,
+        }));
+        toggleMenuOff();
+    };
+
+
     return <>
         {isOpen
             ? <div
@@ -283,6 +308,27 @@ export const ContextMenu = () => {
                                 [classes.item]: true,
                             })}>
                             {buttons.addRowDown}
+                        </div>
+                        <div
+                            onClick={handleAddColumn('left')}
+                            className={classNames({
+                                [classes.item]: true,
+                            })}>
+                            {buttons.addColumnLeft}
+                        </div>
+                        <div
+                            onClick={handleAddColumn('right')}
+                            className={classNames({
+                                [classes.item]: true,
+                            })}>
+                            {buttons.addColumnRight}
+                        </div>
+                        <div
+                            onClick={handleDeleteColumn}
+                            className={classNames({
+                                [classes.item]: true,
+                            })}>
+                            {buttons.deleteColumn}
                         </div>
                     </>
                     : null

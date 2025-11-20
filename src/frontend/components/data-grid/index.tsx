@@ -85,6 +85,31 @@ export const DataGrid = ({ filepath = null }: { filepath: string | null }) => {
         setList([...list]);
     };
 
+    /**
+     * Добавление нового столбца
+     */
+    const addColumn = async (event: CustomEvent) => {
+        if (!event.detail.colIndex) {
+            return;
+        }
+
+        const { colIndex, type }: { colIndex: number, type: 'left' | 'right' } = event.detail;
+
+        const updatedList = type === 'left'
+            ? list.map((row) => {
+                const newCols = [...row.cols];
+                newCols.splice(colIndex, 0, '');
+                return { ...row, cols: newCols };
+            })
+            : list.map((row) => {
+                const newCols = [...row.cols];
+                newCols.splice(colIndex + 1, 0, '');
+                return { ...row, cols: newCols };
+            });
+
+        setList(updatedList);
+    };
+
     const removeRow = async (event: CustomEvent) => {
         if (!event.detail.rowId) {
             return;
@@ -98,16 +123,36 @@ export const DataGrid = ({ filepath = null }: { filepath: string | null }) => {
         setEditData({ rowId, colIndex, text });
     };
 
+    const removeColumn = async (event: CustomEvent) => {
+        if (!event.detail.colIndex) {
+            return;
+        }
+
+        const { colIndex } = event.detail;
+
+        const updatedList = list.map((row) => {
+            const newCols = [...row.cols];
+            newCols.splice(colIndex, 1);
+            return { ...row, cols: newCols };
+        });
+
+        setList(updatedList);
+    };
+
     useEffect(() => {
         fetchMainTable().finally();
     }, []);
 
     useEffect(() => {
         document.addEventListener(customEvents.REMOVE_ROW, removeRow);
+        document.addEventListener(customEvents.REMOVE_COLUMN, removeColumn);
         document.addEventListener(customEvents.ADD_ROW, addRow);
+        document.addEventListener(customEvents.ADD_COLUMN, addColumn);
         return () => {
-            document.addEventListener(customEvents.REMOVE_ROW, removeRow);
-            document.addEventListener(customEvents.ADD_ROW, removeRow);
+            document.removeEventListener(customEvents.REMOVE_ROW, removeRow);
+            document.removeEventListener(customEvents.REMOVE_COLUMN, removeColumn);
+            document.removeEventListener(customEvents.ADD_ROW, addRow);
+            document.removeEventListener(customEvents.ADD_COLUMN, addColumn);
         };
     });
 
