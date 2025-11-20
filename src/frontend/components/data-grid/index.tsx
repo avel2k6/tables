@@ -12,6 +12,7 @@ import { TEditData } from '../../domains/EditData';
 import { Pagination } from '../pagination';
 import { generateId } from '../../utils';
 import { customEvents } from '../custom-events';
+import { Filter } from '../filter';
 
 export const DataGrid = ({ filepath = null }: { filepath: string | null }) => {
     const [list, setList] = useState<TRow[]>([]);
@@ -22,17 +23,15 @@ export const DataGrid = ({ filepath = null }: { filepath: string | null }) => {
 
     const { handleError } = useContext(ErrorHandlerContext);
 
+    const [filter, setFilter] = useState<Record<number, string>>({});
+
     const [loadingState, setLoadingState] = useState<TFetchState>(fetchStateStatus.IDLE);
 
     const [pageState, setPageState, setPageNumber] = useListingPagination({
         number: 1,
-        size: 10,
+        size: 7,
         total: 1000,
     });
-
-    const paginationStartIndex = pageState.number * pageState.size - pageState.size;
-    const paginationEndIndex = paginationStartIndex + pageState.size;
-    const paginatedList = list.slice(paginationStartIndex, paginationEndIndex);
 
     const fetchMainTable = async () => {
         try {
@@ -139,6 +138,13 @@ export const DataGrid = ({ filepath = null }: { filepath: string | null }) => {
         setList(updatedList);
     };
 
+    const updateFilter = (colIndex: number, value: string) => {
+        setFilter((prev) => ({
+            ...prev,
+            [colIndex]: value,
+        }));
+    };
+
     useEffect(() => {
         fetchMainTable().finally();
     }, []);
@@ -156,16 +162,31 @@ export const DataGrid = ({ filepath = null }: { filepath: string | null }) => {
         };
     });
 
+    console.log(filter);
+
+    const filteredList = list.filter((row) => row.cols.every((col, colIndex) => {
+        const filterValue = filter[colIndex];
+        if (!filterValue) return true;
+        return col.toLowerCase().includes(filterValue.toLowerCase());
+    }));
+
+    const paginationStartIndex = pageState.number * pageState.size - pageState.size;
+    const paginationEndIndex = paginationStartIndex + pageState.size;
+    const paginatedList = filteredList.slice(paginationStartIndex, paginationEndIndex);
+
     return <Page>
         <MainListContext.Provider value={{
             list,
             updateList,
+            updateFilter,
             setColEditData: handleSetEditData,
+            filter,
         }}>
             <Page.Pagination>
                 <Pagination currentPageNumber={pageState.number} size={pageState.size} total={pageState.total} onChange={setPageNumber}/>
             </Page.Pagination>
             <Page.List>
+
                 <List
                     list={paginatedList}
                     setColEditData={handleSetEditData}

@@ -17,7 +17,7 @@ export type TCommonListContext<TList, TFilter, TSort> = {
     filter?: TFilter,
 
     // Колбэк обновления фильтра
-    updateFilter?: (filter: Partial<TFilter>) => void,
+    updateFilter?: (colIndex: number, value: string) => void,
 
     // Сортировка
     sort?: TSort,

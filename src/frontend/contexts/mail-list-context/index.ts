@@ -5,6 +5,7 @@ export const MainListContext = createContext<TMainListContext>({
     setColEditData: () => {},
     updateFilter: () => {},
     updateSort: () => {},
-    list: [],
     updateList: async () => {},
+    list: [],
+    filter: {},
 });
